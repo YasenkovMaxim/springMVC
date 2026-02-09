@@ -254,7 +254,6 @@
                                id="firstName"
                                name="firstName"
                                class="form-control"
-                               value="${param.firstName}"
                                placeholder="Введите ваше имя"
                                required>
                     </div>
@@ -265,7 +264,6 @@
                                id="lastName"
                                name="lastName"
                                class="form-control"
-                               value="${param.lastName}"
                                placeholder="Введите вашу фамилию"
                                required>
                     </div>
@@ -278,7 +276,6 @@
                                id="email"
                                name="email"
                                class="form-control"
-                               value="${param.email}"
                                placeholder="example@mail.com"
                                required>
                     </div>
@@ -313,7 +310,6 @@
                                id="username"
                                name="username"
                                class="form-control"
-                               value="${param.username}"
                                placeholder="Придумайте логин"
                                required>
                     </div>
@@ -324,7 +320,6 @@
                                id="userId"
                                name="userId"
                                class="form-control"
-                               value="${param.userId}"
                                placeholder="Внешний ID пользователя">
                     </div>
                 </div>

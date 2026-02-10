@@ -6,5 +6,9 @@
 </head>
 <body>
 Good news!
+First name: ${first_name}
+Last name: ${last_name}
+Age: ${age}
+Email: ${email}
 </body>
 </html>

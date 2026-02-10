@@ -17,6 +17,11 @@ public class SecurityService {
         System.out.println(lastName);
         System.out.println(email);
         System.out.println(age);
-        return new UserResponse();
+        UserResponse userResponse = new UserResponse();
+        userResponse.setFirstName(firstName);
+        userResponse.setLastName(lastName);
+        userResponse.setAge(age);
+        userResponse.setEmail(email);
+        return userResponse;
     }
 }

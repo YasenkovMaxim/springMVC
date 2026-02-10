@@ -3,6 +3,7 @@ package com.maxim.controller;
 import com.maxim.model.dto.UserResponse;
 import com.maxim.service.SecurityService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,13 @@ public class SecurityController {
                                @RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName,
                                @RequestParam("email") String email,
-                               @RequestParam("age") Integer age) {
+                               @RequestParam("age") Integer age,
+                               Model model) {
         UserResponse userResponse = securityService.registration(username, password, firstName, lastName, email, age);
+        model.addAttribute("first_name", userResponse.getFirstName());
+        model.addAttribute("last_name", userResponse.getLastName());
+        model.addAttribute("age", userResponse.getAge());
+        model.addAttribute("email", userResponse.getEmail());
         System.out.println("registration-method");
         return "registration-response";
     }

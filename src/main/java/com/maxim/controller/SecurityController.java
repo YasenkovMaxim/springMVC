@@ -3,7 +3,10 @@ package com.maxim.controller;
 import com.maxim.model.dto.RequestRegistrationDTO;
 import com.maxim.model.dto.UserResponse;
 import com.maxim.service.SecurityService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +29,20 @@ public class SecurityController {
     }
 
     @PostMapping("/registration")
-    public ModelAndView registration(@ModelAttribute RequestRegistrationDTO registrationDTO,
+    public ModelAndView registration(@ModelAttribute @Valid RequestRegistrationDTO registrationDTO,
+                                     BindingResult bindingResult,
                                      ModelAndView modelAndView) {
+
+        // обработка ошибок при валидации
+        if (bindingResult.hasErrors()) {
+            for (ObjectError objectError : bindingResult.getAllErrors()) {
+                System.out.println(objectError.getDefaultMessage());
+            }
+            modelAndView.addObject("errors", bindingResult.getAllErrors()); // помещает отчет об ошибках на стр.
+            modelAndView.setViewName("error");// на какую стр перекинет
+            return modelAndView;
+        }
+
         UserResponse userResponse = securityService.registration(registrationDTO);
         modelAndView.addObject("first_name", userResponse.getFirstName());
         modelAndView.addObject("last_name", userResponse.getLastName());

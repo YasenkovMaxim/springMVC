@@ -1,13 +1,14 @@
 package com.maxim.controller;
 
+import com.maxim.model.dto.RequestRegistrationDTO;
 import com.maxim.model.dto.UserResponse;
 import com.maxim.service.SecurityService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/security")
@@ -25,19 +26,14 @@ public class SecurityController {
     }
 
     @PostMapping("/registration")
-    public String registration(@RequestParam("username") String username,
-                               @RequestParam("password") String password,
-                               @RequestParam("firstName") String firstName,
-                               @RequestParam("lastName") String lastName,
-                               @RequestParam("email") String email,
-                               @RequestParam("age") Integer age,
-                               Model model) {
-        UserResponse userResponse = securityService.registration(username, password, firstName, lastName, email, age);
-        model.addAttribute("first_name", userResponse.getFirstName());
-        model.addAttribute("last_name", userResponse.getLastName());
-        model.addAttribute("age", userResponse.getAge());
-        model.addAttribute("email", userResponse.getEmail());
-        System.out.println("registration-method");
-        return "registration-response";
+    public ModelAndView registration(@ModelAttribute RequestRegistrationDTO registrationDTO,
+                                     ModelAndView modelAndView) {
+        UserResponse userResponse = securityService.registration(registrationDTO);
+        modelAndView.addObject("first_name", userResponse.getFirstName());
+        modelAndView.addObject("last_name", userResponse.getLastName());
+        modelAndView.addObject("age", userResponse.getAge());
+        modelAndView.addObject("email", userResponse.getEmail());
+        modelAndView.setViewName("registration-response");
+        return modelAndView;
     }
 }

@@ -1,5 +1,6 @@
 package com.maxim.controller;
 
+import com.maxim.exceptions.SecurityNotFound;
 import com.maxim.model.dto.RequestRegistrationDTO;
 import com.maxim.model.dto.UserResponse;
 import com.maxim.service.SecurityService;
@@ -7,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,4 +53,14 @@ public class SecurityController {
         modelAndView.setViewName("registration-response");
         return modelAndView;
     }
+
+
+    //@ExceptionHandler(value ={SecurityNotFound.class, Exception.class})
+    //public ModelAndView exceptionHandler(Exception e){
+    //    ModelAndView modelAndView = new ModelAndView();
+    //    System.out.println("exceptionHadler method in SecurityConrtoller. Exception: " + e);
+    //    modelAndView.addObject("errors", e.getMessage());
+    //    modelAndView.setViewName("error");
+    //    return modelAndView;
+    //}
 }

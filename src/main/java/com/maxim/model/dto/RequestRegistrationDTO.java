@@ -1,5 +1,6 @@
 package com.maxim.model.dto;
 
+import com.maxim.annotations.IsAdult;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -30,8 +31,7 @@ public class RequestRegistrationDTO {
     @Email
     private String email;
 
-    @Min(18)
-    @Max(110)
+    @IsAdult
     private Integer age;
 
 }
